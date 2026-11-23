@@ -884,14 +884,14 @@ button,input{font-family:inherit}
   <!-- ===================== หลังบ้าน ===================== -->
   <sc-if value="{{isAdmin}}" hint-placeholder-val="{{ false }}">
   <div style="flex:1;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;padding:16px;overflow-y:auto">
-    <div style="flex:none;display:flex;align-items:baseline;gap:12px">
-      <span style="font-size:24px;font-weight:700">หลังบ้าน</span>
-      <div role="group" aria-label="หมวดหลังบ้าน" style="display:flex;gap:4px;padding:4px;border-radius:14px;background:#EADCC6">
+    <div style="flex:none;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <span style="flex:none;font-size:24px;font-weight:700;white-space:nowrap">หลังบ้าน</span>
+      <div role="group" aria-label="หมวดหลังบ้าน" style="display:flex;gap:4px;padding:4px;border-radius:14px;background:#EADCC6;max-width:100%;overflow-x:auto">
         <sc-for list="{{aTabs}}" as="t" hint-placeholder-count="3">
-          <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}" style="height:40px;padding:0 11px;border:0;border-radius:10px;font-size:15px;cursor:pointer;background:{{t.bg}};color:#2A1810;font-weight:{{t.fw}}">{{t.label}}</button>
+          <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}" style="flex:none;height:40px;padding:0 10px;border:0;border-radius:10px;font-size:15px;white-space:nowrap;cursor:pointer;background:{{t.bg}};color:#2A1810;font-weight:{{t.fw}}">{{t.label}}</button>
         </sc-for>
       </div>
-      <span style="font-size:14px;color:#6B5547">{{aNote}}</span>
+      <span style="flex:1;min-width:0;font-size:14px;color:#6B5547">{{aNote}}</span>
     </div>
     <sc-if value="{{aOverview}}" hint-placeholder-val="{{ true }}">
     <div style="flex:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px">
@@ -2808,5 +2808,21 @@ class Component extends DCLogic {
 <script>if ('serviceWorker' in navigator) { window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); }); }</script>
 <div id="rotate-hint" style="display:none;position:fixed;left:0;top:0;right:0;bottom:0;z-index:99999;background:#F08000;color:#2A1810;font-family:'IBM Plex Sans Thai',system-ui,sans-serif;align-items:center;justify-content:center;text-align:center;padding:24px;font-size:64px;font-weight:700;line-height:1.6">กรุณาหมุนมือถือเป็นแนวนอน<br>เพื่อใช้งาน POS</div>
 <script>window.__fit&&window.__fit()</script>
+<div id="boot" style="position:fixed;left:0;top:0;right:0;bottom:0;z-index:99998;background:#F7EFE2;color:#2A1810;font-family:system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;font-size:48px;font-weight:700">กำลังโหลด POS ธานี...<div id="boot-err" style="font-size:28px;font-weight:400;color:#B42318;max-width:900px;word-break:break-all"></div></div>
+<script>
+(function () {
+  var err = document.getElementById('boot-err');
+  function show(m) { if (err) err.textContent += m + ' | '; }
+  window.addEventListener('error', function (e) { show('ผิดพลาด: ' + (e.message || e.target && e.target.src || '')); }, true);
+  window.addEventListener('unhandledrejection', function (e) { show('ผิดพลาด: ' + (e.reason && e.reason.message || e.reason)); });
+  var tries = 0;
+  var iv = setInterval(function () {
+    tries++;
+    var ok = document.querySelector('header');
+    if (ok) { var b = document.getElementById('boot'); if (b) b.remove(); clearInterval(iv); }
+    else if (tries > 40 && err && !err.textContent) { err.textContent = 'โหลดไม่สำเร็จ ลองปิดแอปแล้วเปิดใหม่'; }
+  }, 150);
+})();
+</script>
 </body>
 </html>
