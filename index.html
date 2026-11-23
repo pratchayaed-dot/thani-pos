@@ -43,7 +43,7 @@ a{color:inherit;text-decoration:none}
 button,input{font-family:inherit}
 </style>
 </helmet>
-<div style="position:relative;width:100%;min-width:1100px;height:100vh;min-height:600px;box-sizing:border-box;display:flex;flex-direction:column;background:#F7EFE2;color:#2A1810;font-family:'IBM Plex Sans Thai',system-ui,sans-serif;overflow:hidden">
+<div style="position:relative;width:100%;min-width:1100px;height:100vh;min-height:480px;box-sizing:border-box;display:flex;flex-direction:column;background:#F7EFE2;color:#2A1810;font-family:'IBM Plex Sans Thai',system-ui,sans-serif;overflow:hidden">
 
   <header style="flex:none;height:64px;background:#F08000;color:#2A1810;display:flex;align-items:center;gap:10px;padding:0 14px;white-space:nowrap">
     <div style="flex:none;display:flex;align-items:center;gap:8px">
@@ -104,7 +104,7 @@ button,input{font-family:inherit}
   <div style="flex:1;min-height:0;display:flex;gap:16px;padding:16px">
     <section style="flex:1;min-width:0;display:flex;flex-direction:column;gap:12px">
 
-      <div style="flex:none;height:56px;box-sizing:border-box;display:flex;align-items:center;gap:20px;padding:0 8px 0 16px;background:#fff;border:2px solid #E3D3BC;border-radius:14px;font-size:15px;font-weight:600">
+      <div style="flex:none;min-height:56px;box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;column-gap:14px;row-gap:6px;padding:6px 8px 6px 16px;background:#fff;border:2px solid #E3D3BC;border-radius:14px;font-size:15px;font-weight:600;white-space:nowrap">
         <span style="display:inline-flex;align-items:center;gap:8px">
           <span aria-hidden="true" style="width:18px;height:18px;box-sizing:border-box;border:2px dashed #CBB9A0;border-radius:5px;background:#fff"></span>ว่าง {{cFree}}
         </span>
@@ -119,7 +119,7 @@ button,input{font-family:inherit}
         </span>
         <span style="flex:1"></span>
         <sc-if value="{{confirmAll}}" hint-placeholder-val="{{ false }}">
-          <span style="font-size:15px;font-weight:700;color:#B42318">เคลียร์ทุกโต๊ะ ออร์เดอร์หายทั้งหมด?</span>
+          <span style="flex:none;font-size:15px;font-weight:700;color:#B42318">เคลียร์ทุกโต๊ะ ออร์เดอร์หายทั้งหมด?</span>
           <button type="button" onClick="{{doClearAll}}" style="height:44px;padding:0 18px;border:2px solid #B42318;border-radius:12px;background:#B42318;color:#fff;font-size:15px;font-weight:700;cursor:pointer">ยืนยัน</button>
           <button type="button" onClick="{{cancelConfirm}}" style="height:44px;padding:0 18px;border:2px solid #E3D3BC;border-radius:12px;background:#fff;color:#2A1810;font-size:15px;font-weight:600;cursor:pointer">ยกเลิก</button>
         </sc-if>
@@ -628,7 +628,7 @@ button,input{font-family:inherit}
         </sc-for>
       </div>
 
-      <div style="flex:1;min-height:0;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;padding:24px;background:#fff;border:2px solid #E3D3BC;border-radius:18px">
+      <div style="flex:1;min-height:0;overflow-y:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;padding:24px;background:#fff;border:2px solid #E3D3BC;border-radius:18px">
 
         <sc-if value="{{isCash}}" hint-placeholder-val="{{ true }}">
           <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
@@ -684,13 +684,13 @@ button,input{font-family:inherit}
           <div style="flex:1"></div>
 
           <sc-if value="{{canConfirm}}" hint-placeholder-val="{{ true }}">
-            <button type="button" onClick="{{confirmPay}}" style="flex:none;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:22px;font-weight:700;cursor:pointer">
+            <button type="button" onClick="{{confirmPay}}" style="position:sticky;bottom:0;z-index:1;flex:none;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:22px;font-weight:700;cursor:pointer">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
               ยืนยันรับเงิน · พิมพ์ใบเสร็จ
             </button>
           </sc-if>
           <sc-if value="{{cannotConfirm}}" hint-placeholder-val="{{ false }}">
-            <div aria-disabled="true" style="flex:none;height:72px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px dashed #B8AC9B;border-radius:16px;background:#E2DACD;color:#5E5348;font-size:20px;font-weight:700">{{cantText}}</div>
+            <div aria-disabled="true" style="position:sticky;bottom:0;z-index:1;flex:none;height:72px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:2px dashed #B8AC9B;border-radius:16px;background:#E2DACD;color:#5E5348;font-size:20px;font-weight:700">{{cantText}}</div>
           </sc-if>
         </sc-if>
 
@@ -727,7 +727,7 @@ button,input{font-family:inherit}
               </div>
               <div style="font-size:14px;line-height:1.5;color:#6B5547">ถ้าเชื่อมแอปธนาคารได้ ระบบจะยืนยันยอดเข้าให้อัตโนมัติ ตอนนี้ให้พนักงานกดยืนยันเมื่อเห็นเงินเข้า</div>
               <sc-if value="{{hasBill}}" hint-placeholder-val="{{ true }}">
-                <button type="button" onClick="{{confirmPay}}" style="margin-top:8px;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:21px;font-weight:700;cursor:pointer">
+                <button type="button" onClick="{{confirmPay}}" style="position:sticky;bottom:0;z-index:1;margin-top:8px;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:21px;font-weight:700;cursor:pointer">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
                   ยืนยันว่าได้รับเงินแล้ว
                 </button>
@@ -746,7 +746,7 @@ button,input{font-family:inherit}
             </div>
           </div>
           <sc-if value="{{hasBill}}" hint-placeholder-val="{{ true }}">
-            <button type="button" onClick="{{confirmPay}}" style="flex:none;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:22px;font-weight:700;cursor:pointer">
+            <button type="button" onClick="{{confirmPay}}" style="position:sticky;bottom:0;z-index:1;flex:none;height:72px;display:flex;align-items:center;justify-content:center;gap:10px;border:2px solid #F08000;border-radius:16px;background:#F08000;color:#2A1810;font-size:22px;font-weight:700;cursor:pointer">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>
               ยืนยันรับเงิน · พิมพ์ใบเสร็จ
             </button>
